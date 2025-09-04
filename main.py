@@ -31,8 +31,7 @@ st.set_page_config(
 # -----------------------------------------------------------------------------
 # Styling
 # -----------------------------------------------------------------------------
-st.markdown(
-    """
+st.markdown("""
 <style>
     .main-header {
         font-size: 3rem;
@@ -47,38 +46,56 @@ st.markdown(
         margin-bottom: 1rem;
     }
     .metric-container {
-        background-color: #f0f2f6;
-        padding: 1rem;
+        background: transparent;
+        border: 2px solid #74b9ff;
+        color: #ffffff;
+        padding: 1.5rem;
         border-radius: 10px;
         margin: 0.5rem 0;
     }
+    .metric-container h3 {
+        color: #74b9ff;
+        margin-bottom: 0.5rem;
+    }
+    .metric-container p {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+    }
+    .metric-container ul {
+        color: #cccccc;
+    }
+    .metric-container li {
+        margin-bottom: 0.3rem;
+    }
     .prediction-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: transparent;
+        border: 2px solid #667eea;
         color: white;
         padding: 1rem;
         border-radius: 10px;
         margin: 1rem 0;
     }
     .success-box {
-        background-color: #d4edda;
-        border: 1px solid #c3e6cb;
-        color: #155724;
+        background: transparent;
+        border: 2px solid #28a745;
+        color: #ffffff;
         padding: 1rem;
         border-radius: 5px;
         margin: 1rem 0;
     }
     .info-box {
-        background-color: #d1ecf1;
-        border: 1px solid #bee5eb;
-        color: #0c5460;
+        background: transparent;
+        border: 2px solid #17a2b8;
+        color: #ffffff;
         padding: 1rem;
         border-radius: 5px;
         margin: 1rem 0;
     }
+    .sidebar .sidebar-content {
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    }
 </style>
-""",
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)
 
 
 # -----------------------------------------------------------------------------
@@ -1211,4 +1228,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
