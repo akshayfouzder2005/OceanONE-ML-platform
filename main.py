@@ -385,7 +385,11 @@ st.markdown('<div class="bg-animation"></div>', unsafe_allow_html=True)
 # Modern Navigation Component
 # -----------------------------------------------------------------------------
 def create_modern_navigation():
-    """Create a modern, feature-rich navigation component"""
+    """Create a modern, feature-rich navigation component with fixed state management"""
+
+    # Initialize session state for current page if not exists
+    if "current_page" not in st.session_state:
+        st.session_state.current_page = "home"
 
     # Navigation data with icons and status
     nav_items = [
@@ -414,12 +418,23 @@ def create_modern_navigation():
             </div>
         """, unsafe_allow_html=True)
 
-        # Create navigation items
-        selected_page = None
+        # Create navigation items with proper state management
         for item in nav_items:
-            status_class = "status-active" if item["status"] == "active" else "status-inactive"
-            if st.button(f"{item['icon']} {item['name']}", key=item['key'], use_container_width=True):
-                selected_page = item['key']
+            # Check if this is the currently active page
+            is_active = st.session_state.current_page == item['key']
+
+            # Create button with unique key and proper styling
+            button_style = "primary" if is_active else "secondary"
+
+            if st.button(
+                    f"{item['icon']} {item['name']}",
+                    key=f"nav_{item['key']}",
+                    use_container_width=True,
+                    type=button_style
+            ):
+                # Update session state when button is clicked
+                st.session_state.current_page = item['key']
+                st.rerun()  # Force rerun to update the page
 
         # Quick stats section with glassmorphism
         st.markdown("""
@@ -454,7 +469,10 @@ def create_modern_navigation():
         </div>
         """, unsafe_allow_html=True)
 
-        return selected_page
+    # Return current page from session state
+    return st.session_state.current_page
+
+
 # -----------------------------------------------------------------------------
 # Model loading (cached)
 # -----------------------------------------------------------------------------
