@@ -393,13 +393,13 @@ def create_modern_navigation():
 
     # Navigation data with icons and status
     nav_items = [
-        {"name": "Home", "icon": "🏠", "key": "home", "status": "active"},
-        {"name": "Fish Species ID", "icon": "🐟", "key": "fish", "status": "active"},
-        {"name": "Ocean Parameters", "icon": "🌊", "key": "ocean", "status": "active"},
-        {"name": "Biodiversity", "icon": "🐠", "key": "biodiversity", "status": "active"},
-        {"name": "Comprehensive", "icon": "📊", "key": "comprehensive", "status": "active"},
-        {"name": "Data Visualization", "icon": "📈", "key": "visualization", "status": "active"},
-        {"name": "About", "icon": "ℹ️", "key": "about", "status": "active"}
+        {"name": "Home", "icon": "", "key": "home", "status": "active"},
+        {"name": "Fish Species ID", "icon": "", "key": "fish", "status": "active"},
+        {"name": "Ocean Parameters", "icon": "", "key": "ocean", "status": "active"},
+        {"name": "Biodiversity", "icon": "", "key": "biodiversity", "status": "active"},
+        {"name": "Comprehensive", "icon": "", "key": "comprehensive", "status": "active"},
+        {"name": "Data Visualization", "icon": "", "key": "visualization", "status": "active"},
+        {"name": "About", "icon": "", "key": "about", "status": "active"}
     ]
 
     # Quick stats for navigation sidebar
@@ -414,7 +414,7 @@ def create_modern_navigation():
         st.markdown("""
         <div class="nav-container">
             <div class="nav-title">
-                🧭 Navigation Panel
+                Navigation Panel
             </div>
         """, unsafe_allow_html=True)
 
@@ -733,7 +733,7 @@ def show_home_page():
         st.markdown(
             """
             <div class="metric-container">
-                <h3>🐟 Fish Identification</h3>
+                <h3>Fish Identification</h3>
                 <p>Classify fish species using morphometric measurements with 85%+ accuracy powered by advanced machine learning algorithms.</p>
                 <ul>
                     <li>4 Marine Species Supported</li>
@@ -750,7 +750,7 @@ def show_home_page():
         st.markdown(
             """
             <div class="metric-container">
-                <h3>🌊 Ocean Monitoring</h3>
+                <h3>Ocean Monitoring</h3>
                 <p>Predict oceanographic parameters for comprehensive ecosystem health assessment using environmental data.</p>
                 <ul>
                     <li>Temperature Prediction</li>
@@ -767,7 +767,7 @@ def show_home_page():
         st.markdown(
             """
             <div class="metric-container">
-                <h3>🐠 Biodiversity Analysis</h3>
+                <h3>Biodiversity Analysis</h3>
                 <p>Comprehensive marine biodiversity and ecosystem health evaluation for conservation planning.</p>
                 <ul>
                     <li>Species Richness Estimation</li>
@@ -785,7 +785,7 @@ def show_home_page():
     # Enhanced metrics display
     st.markdown("""
     <div style="text-align: center; margin: 2rem 0;">
-        <h3 style="color: #667eea; margin-bottom: 2rem;">📊 Platform Performance</h3>
+        <h3 style="color: #667eea; margin-bottom: 2rem;">Platform Performance</h3>
     </div>
     """, unsafe_allow_html=True)
 
@@ -828,7 +828,7 @@ def show_home_page():
     # Enhanced activity display
     st.markdown("""
     <div style="margin: 2rem 0;">
-        <h3 style="color: #667eea; margin-bottom: 1rem;">🔄 Recent Platform Activity</h3>
+        <h3 style="color: #667eea; margin-bottom: 1rem;"> Recent Platform Activity</h3>
     </div>
     """, unsafe_allow_html=True)
 
@@ -860,7 +860,7 @@ def show_home_page():
 def show_fish_identification(models):
     st.markdown("""
     <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: #667eea; font-weight: 600;">🐟 Advanced Fish Species Identification</h2>
+        <h2 style="color: #667eea; font-weight: 600;">Advanced Fish Species Identification</h2>
     </div>
     """, unsafe_allow_html=True)
 
@@ -913,10 +913,10 @@ def show_fish_identification(models):
                 help="Maximum body width"
             )
 
-        predict_button = st.button("🔍 Identify Fish Species", type="primary", use_container_width=True)
+        predict_button = st.button("Identify Fish Species", type="primary", use_container_width=True)
 
     with col2:
-        st.markdown("### 🐠 Supported Species Database")
+        st.markdown("### Supported Species Database")
         species_info = {
             "🐟 Bream": "Medium-sized fish, typically 20-30cm, weight 200-400g. Commonly found in freshwater environments.",
             "🎣 Perch": "Popular sport fish, 15-25cm length, weight 100-250g. Known for distinctive striped pattern.",
@@ -933,13 +933,13 @@ def show_fish_identification(models):
             """, unsafe_allow_html=True)
 
     if predict_button:
-        with st.spinner("🤖 Analyzing fish measurements..."):
+        with st.spinner(" Analyzing fish measurements..."):
             result = predict_fish_species_real(length, weight, height, width, models)
 
         st.markdown("---")
         st.markdown("""
         <div style="text-align: center; margin: 2rem 0;">
-            <h3 style="color: #667eea;">🎯 Identification Results</h3>
+            <h3 style="color: #667eea;">Identification Results</h3>
         </div>
         """, unsafe_allow_html=True)
 
@@ -998,7 +998,7 @@ def show_fish_identification(models):
             st.write(f"**Height:** {height} cm")
             st.write(f"**Width:** {width} cm")
 
-        st.markdown("### 📊 Species Probability Analysis")
+        st.markdown("### Species Probability Analysis")
         prob_df = pd.DataFrame(list(result["all_probabilities"].items()),
                                columns=["Species", "Probability"]).sort_values(
             "Probability", ascending=False
@@ -1111,7 +1111,7 @@ def show_ocean_prediction(models):
         st.markdown("---")
         st.markdown("""
         <div style="text-align: center; margin: 2rem 0;">
-            <h3 style="color: #667eea;">🎯 Ocean Parameter Predictions</h3>
+            <h2 style="color: #667eea;">Ocean Parameter Predictions</h2>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1219,7 +1219,7 @@ def show_biodiversity_assessment(models):
             max_value=35.0,
             value=26.0,
             step=0.5,
-            help="Average water temperature"
+            help="Min_value=15.0, Max_value=35.0"
         )
         depth = st.number_input(
             "Water Depth (m)",
@@ -1301,7 +1301,7 @@ def show_biodiversity_assessment(models):
         st.markdown("---")
         st.markdown("""
         <div style="text-align: center; margin: 2rem 0;">
-            <h3 style="color: #667eea;">🎯 Assessment Results</h3>
+            <h2 style="color: #667eea;">Assessment Results</h2>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1946,14 +1946,14 @@ def show_data_visualization():
 def show_about_page():
     st.markdown("""
     <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: #667eea; font-weight: 600;">ℹ️ About CMLRE Marine ML Platform</h2>
+        <h2 style="color: #667eea; font-weight: 600;"></h2>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown(
         """
         <div class="info-box">
-            <h3>🌊 Centre for Marine Living Resources and Ecology (CMLRE)</h3>
+            <h3> Centre for Marine Living Resources and Ecology (CMLRE)</h3>
             <p style="margin-bottom: 0;">Ministry of Earth Sciences, Government of India</p>
         </div>
         """,
@@ -1963,7 +1963,7 @@ def show_about_page():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("### 🎯 Project Overview")
+        st.markdown("###  Project Overview")
         st.markdown(
             """
             The CMLRE Marine ML Platform represents a cutting-edge artificial intelligence system 
@@ -1981,7 +1981,7 @@ def show_about_page():
             """
         )
 
-        st.markdown("### 🔬 Technology Stack")
+        st.markdown("###  Technology Stack")
         st.markdown(
             """
             **Frontend & Visualization:**
@@ -2003,7 +2003,7 @@ def show_about_page():
         )
 
     with col2:
-        st.markdown("### 🐟 AI Model Specifications")
+        st.markdown("###  AI Model Specifications")
 
         model_specs = {
             "Fish Species Classifier": {
@@ -2039,39 +2039,39 @@ def show_about_page():
 
     st.markdown("---")
 
-    st.markdown("### 🔬 Research Applications & Impact")
+    st.markdown("###  Research Applications & Impact")
 
     applications = [
         {
-            "category": "🐠 Fisheries Management",
+            "category": " Fisheries Management",
             "description": "Stock assessment, sustainable fishing practices, and species population monitoring"
         },
         {
-            "category": "🌊 Climate Change Research",
+            "category": " Climate Change Research",
             "description": "Long-term ocean parameter monitoring, climate impact assessment, and trend analysis"
         },
         {
-            "category": "🪸 Coral Reef Conservation",
+            "category": " Coral Reef Conservation",
             "description": "Reef health assessment, biodiversity monitoring, and restoration planning"
         },
         {
-            "category": "🏭 Environmental Impact Assessment",
+            "category": " Environmental Impact Assessment",
             "description": "Pollution monitoring, industrial impact evaluation, and mitigation strategies"
         },
         {
-            "category": "🛡️ Marine Protected Areas",
+            "category": " Marine Protected Areas",
             "description": "Site selection optimization, management effectiveness evaluation, and boundary planning"
         },
         {
-            "category": "📊 Ecosystem Services Quantification",
+            "category": " Ecosystem Services Quantification",
             "description": "Economic valuation of marine ecosystems and natural capital assessment"
         },
         {
-            "category": "🎓 Education & Capacity Building",
+            "category": " Education & Capacity Building",
             "description": "Training programs for marine scientists, conservation practitioners, and policymakers"
         },
         {
-            "category": "📈 Policy & Governance Support",
+            "category": " Policy & Governance Support",
             "description": "Evidence-based policy recommendations and regulatory compliance monitoring"
         }
     ]
@@ -2087,7 +2087,7 @@ def show_about_page():
 
     st.markdown("---")
 
-    st.markdown("### 📈 Platform Performance & Impact Metrics")
+    st.markdown("###  Platform Performance & Impact Metrics")
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -2125,7 +2125,7 @@ def show_about_page():
 
     st.markdown("---")
 
-    st.markdown("### 🌍 Global Collaboration & Partnerships")
+    st.markdown("###  Global Collaboration & Partnerships")
 
     st.markdown("""
     The CMLRE Marine ML Platform benefits from extensive collaboration with national and 
@@ -2164,7 +2164,7 @@ def show_about_page():
 
     st.markdown("---")
 
-    st.markdown("### 🔬 Data Sources & Validation")
+    st.markdown("###  Data Sources & Validation")
 
     data_sources = {
         "Oceanographic Data": [
@@ -2191,13 +2191,13 @@ def show_about_page():
     }
 
     for category, sources in data_sources.items():
-        with st.expander(f"📊 {category}", expanded=False):
+        with st.expander(f" {category}", expanded=False):
             for source in sources:
                 st.markdown(f"• {source}")
 
     st.markdown("---")
 
-    st.markdown("### 🚀 Future Development Roadmap")
+    st.markdown("###  Future Development Roadmap")
 
     roadmap_items = [
         {
@@ -2231,9 +2231,9 @@ def show_about_page():
 
     for item in roadmap_items:
         st.markdown(f"""
-        <div style="background: rgba(102, 126, 234, 0.1); padding: 1.5rem; border-radius: 12px; 
-                    margin-bottom: 1rem; border-left: 4px solid #667eea;">
-            <h4 style="color: #667eea; margin-bottom: 1rem;">{item['phase']}</h4>
+        <div style="background: rgba(102, 126, 234, 0.1); padding: 0.5rem; border-radius: 6px; 
+                    margin-bottom: 0.5rem; border-left: 2px solid #667eea;">
+            <h3 style="color: #667eea; margin-bottom: 1rem;">{item['phase']}</h3>
             <ul style="margin: 0; color: #e0e6ed;">
         """, unsafe_allow_html=True)
 
@@ -2347,13 +2347,12 @@ def show_about_page():
 # Main app function with modern navigation
 # -----------------------------------------------------------------------------
 def main():
-    st.markdown('<h1 class="main-header">🌊 CMLRE Marine Living Resources ML Platform</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header"> OceanOne: Real Time MarineAI for India</h1>', unsafe_allow_html=True)
     st.markdown(
         """
         <div class="info-box">
-            <strong>🎯 Mission:</strong> Advanced AI platform for marine ecosystem monitoring and conservation under 
-            the Ministry of Earth Sciences, India. This platform provides real-time analysis of marine biodiversity, 
-            oceanographic parameters, and fish species identification using cutting-edge machine learning technology.
+            <strong>Mission:</strong> A cutting-edge platform providing real-time analysis of marine biodiversity,
+             ocean health, and ecosystem changes to power data-driven conservation.
         </div>
         """,
         unsafe_allow_html=True,
