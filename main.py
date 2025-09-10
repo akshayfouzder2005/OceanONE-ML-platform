@@ -482,6 +482,7 @@ def load_models():
     models_dir = "models"
 
     if not os.path.exists(models_dir):
+
       return None
 
     try:
@@ -884,7 +885,7 @@ def show_fish_identification(models):
                 "Length (cm)",
                 min_value=10.0,
                 max_value=50.0,
-                value=25.0,
+                value=26.0,
                 step=0.1,
                 help="Total length from nose to tail fin"
             )
@@ -892,7 +893,7 @@ def show_fish_identification(models):
                 "Weight (g)",
                 min_value=50.0,
                 max_value=800.0,
-                value=300.0,
+                value=295.0,
                 step=10.0,
                 help="Total body weight in grams"
             )
@@ -900,7 +901,7 @@ def show_fish_identification(models):
                 "Height (cm)",
                 min_value=5.0,
                 max_value=25.0,
-                value=12.0,
+                value=13.0,
                 step=0.1,
                 help="Maximum body height"
             )
@@ -908,7 +909,7 @@ def show_fish_identification(models):
                 "Width (cm)",
                 min_value=2.0,
                 max_value=10.0,
-                value=4.5,
+                value=5.0,
                 step=0.1,
                 help="Maximum body width"
             )
@@ -1030,9 +1031,7 @@ def show_fish_identification(models):
                 """,
                 unsafe_allow_html=True,
             )
-        else:
-            st.warning(
-                "⚠️ Medium confidence prediction. Consider additional verification or measurements for higher accuracy.")
+
 
 
 def show_ocean_prediction(models):
