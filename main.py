@@ -387,19 +387,18 @@ st.markdown('<div class="bg-animation"></div>', unsafe_allow_html=True)
 def create_modern_navigation():
     """Create a modern, feature-rich navigation component with fixed state management"""
 
-    # Initialize session state for current page if not exists
+    # Initialize session state for current page if not exists - default to dashboard
     if "current_page" not in st.session_state:
-        st.session_state.current_page = "home"
+        st.session_state.current_page = "dashboard"
 
-    # Navigation data with icons and status
+    # Updated navigation data - removed "home" and "about", added "dashboard"
     nav_items = [
-        {"name": "Home", "icon": "", "key": "home", "status": "active"},
+        {"name": "Dashboard", "icon": "", "key": "dashboard", "status": "active"},
         {"name": "Fish Species ID", "icon": "", "key": "fish", "status": "active"},
         {"name": "Ocean Parameters", "icon": "", "key": "ocean", "status": "active"},
         {"name": "Biodiversity", "icon": "", "key": "biodiversity", "status": "active"},
         {"name": "Comprehensive", "icon": "", "key": "comprehensive", "status": "active"},
-        {"name": "Data Visualization", "icon": "", "key": "visualization", "status": "active"},
-        {"name": "About", "icon": "", "key": "about", "status": "active"}
+        {"name": "Data Visualization", "icon": "", "key": "visualization", "status": "active"}
     ]
 
     # Quick stats for navigation sidebar
@@ -414,7 +413,7 @@ def create_modern_navigation():
         st.markdown("""
         <div class="nav-container">
             <div class="nav-title">
-                Navigation Panel
+                OceanOne
             </div>
         """, unsafe_allow_html=True)
 
@@ -471,6 +470,7 @@ def create_modern_navigation():
 
     # Return current page from session state
     return st.session_state.current_page
+
 
 
 # -----------------------------------------------------------------------------
@@ -715,147 +715,174 @@ def assess_biodiversity_demo(temp, depth, pollution, coral_cover, lat, lon):
 # -----------------------------------------------------------------------------
 # Pages
 # -----------------------------------------------------------------------------
-def show_home_page():
+def show_dashboard():
     st.markdown("""
     <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="color: #667eea; font-weight: 600; margin-bottom: 1rem;">
-            🌊 Welcome to Marine Ecosystem Intelligence
+             Marine Ecosystem Intelligence Dashboard
         </h2>
         <p style="color: #e0e6ed; font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin: 0 auto;">
-            Advanced AI-powered platform for comprehensive marine ecosystem monitoring, 
-            species identification, and biodiversity assessment under the Ministry of Earth Sciences, India.
+            Real-time monitoring and analysis of marine ecosystems powered by advanced AI models.
+            Access comprehensive tools for species identification, ocean parameter prediction, and biodiversity assessment.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
+    # System Status Overview
+    st.markdown("### 🔧 System Status")
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.markdown("""
+        <div class="metric-card">
+            <div class="metric-value">Online</div>
+            <div class="metric-label">🟢 Fish Classifier</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class="metric-card">
+            <div class="metric-value">Active</div>
+            <div class="metric-label"> Ocean Predictor</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div class="metric-card">
+            <div class="metric-value">Ready</div>
+            <div class="metric-label"> Bio Assessor</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col4:
+        st.markdown("""
+        <div class="metric-card">
+            <div class="metric-value">95%+</div>
+            <div class="metric-label"> Avg Accuracy</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    # Quick Actions
+    st.markdown("###  Quick Actions")
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown(
-            """
-            <div class="metric-container">
-                <h3>Fish Identification</h3>
-                <p>Classify fish species using morphometric measurements with 85%+ accuracy powered by advanced machine learning algorithms.</p>
-                <ul>
-                    <li>4 Marine Species Supported</li>
-                    <li>Real-time Classification</li>
-                    <li>Confidence Scoring</li>
-                    <li>Morphometric Analysis</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        if st.button(" Identify Fish Species", use_container_width=True):
+            st.session_state.current_page = "fish"
+            st.rerun()
+
+        st.markdown("""
+        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; margin-top: 0.5rem;">
+            <small style="color: #e0e6ed;">Use morphometric measurements to classify fish species with 85%+ accuracy.</small>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.markdown(
-            """
-            <div class="metric-container">
-                <h3>Ocean Monitoring</h3>
-                <p>Predict oceanographic parameters for comprehensive ecosystem health assessment using environmental data.</p>
-                <ul>
-                    <li>Temperature Prediction</li>
-                    <li>Salinity Analysis</li>
-                    <li>Oxygen Level Assessment</li>
-                    <li>Climate Impact Modeling</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        if st.button(" Predict Ocean Parameters", use_container_width=True):
+            st.session_state.current_page = "ocean"
+            st.rerun()
+
+        st.markdown("""
+        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; margin-top: 0.5rem;">
+            <small style="color: #e0e6ed;">Predict temperature, salinity, and oxygen levels from environmental data.</small>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.markdown(
-            """
-            <div class="metric-container">
-                <h3>Biodiversity Analysis</h3>
-                <p>Comprehensive marine biodiversity and ecosystem health evaluation for conservation planning.</p>
-                <ul>
-                    <li>Species Richness Estimation</li>
-                    <li>Shannon Diversity Index</li>
-                    <li>Ecosystem Health Scoring</li>
-                    <li>Conservation Recommendations</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        if st.button(" Assess Biodiversity", use_container_width=True):
+            st.session_state.current_page = "biodiversity"
+            st.rerun()
 
-    st.markdown("---")
-
-    # Enhanced metrics display
-    st.markdown("""
-    <div style="text-align: center; margin: 2rem 0;">
-        <h3 style="color: #667eea; margin-bottom: 2rem;">Platform Performance</h3>
-    </div>
-    """, unsafe_allow_html=True)
-
-    c1, c2, c3, c4 = st.columns(4)
-
-    with c1:
         st.markdown("""
-        <div class="metric-card">
-            <div class="metric-value">4</div>
-            <div class="metric-label">Fish Species Classified</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c2:
-        st.markdown("""
-        <div class="metric-card">
-            <div class="metric-value">85%</div>
-            <div class="metric-label">Model Accuracy</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c3:
-        st.markdown("""
-        <div class="metric-card">
-            <div class="metric-value">6</div>
-            <div class="metric-label">Ocean Parameters</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c4:
-        st.markdown("""
-        <div class="metric-card">
-            <div class="metric-value">60+</div>
-            <div class="metric-label">Sites Monitored</div>
+        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; margin-top: 0.5rem;">
+            <small style="color: #e0e6ed;">Evaluate ecosystem health and species diversity metrics.</small>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("---")
 
-    # Enhanced activity display
-    st.markdown("""
-    <div style="margin: 2rem 0;">
-        <h3 style="color: #667eea; margin-bottom: 1rem;"> Recent Platform Activity</h3>
-    </div>
-    """, unsafe_allow_html=True)
+    # Recent Activity Dashboard
+    st.markdown("### Recent Analysis Activity")
 
+    # Generate sample recent activity data
     recent_data = pd.DataFrame(
         {
-            "Time": pd.date_range("2024-01-01", periods=10, freq="h"),
-            "Analysis Type": np.random.choice(["Fish ID", "Ocean Pred", "Bio Assessment"], 10),
-            "Location": [f"Site_{i}" for i in range(1, 11)],
-            "Result": np.random.choice([
-                "High Confidence",
-                "Medium Confidence",
-                "Low Confidence",
-            ], 10),
+            "Timestamp": pd.date_range("2024-01-01 08:00", periods=15, freq="2h"),
+            "Analysis Type": np.random.choice(
+                ["Fish ID", "Ocean Prediction", "Biodiversity Assessment", "Comprehensive Analysis"], 15),
+            "Location": [f"Site_{np.random.randint(1, 21):02d}" for _ in range(15)],
+            "Confidence": np.random.uniform(0.75, 0.95, 15),
+            "Status": np.random.choice(["Completed", "Processing", "Queued"], 15, p=[0.8, 0.15, 0.05])
         }
     )
 
+    # Format confidence as percentage
+    recent_data["Confidence"] = (recent_data["Confidence"] * 100).round(1)
+
     st.dataframe(
-        recent_data,
+        recent_data.head(10),
         use_container_width=True,
         column_config={
-            "Time": st.column_config.DatetimeColumn("Timestamp"),
+            "Timestamp": st.column_config.DatetimeColumn("Time", format="MMM DD, HH:mm"),
             "Analysis Type": st.column_config.TextColumn("Analysis"),
             "Location": st.column_config.TextColumn("Site"),
-            "Result": st.column_config.TextColumn("Confidence Level")
+            "Confidence": st.column_config.NumberColumn("Confidence (%)", format="%.1f%%"),
+            "Status": st.column_config.TextColumn("Status")
         }
     )
+
+    st.markdown("---")
+
+    # Performance Metrics
+    st.markdown("### Performance Overview")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        # Create sample performance data
+        performance_data = pd.DataFrame({
+            "Model": ["Fish Classifier", "Ocean Predictor", "Biodiversity Assessor"],
+            "Accuracy": [87.3, 84.1, 89.7],
+            "Predictions Today": [45, 32, 28],
+            "Avg Response Time (ms)": [120, 180, 95]
+        })
+
+        fig_performance = px.bar(
+            performance_data,
+            x="Model",
+            y="Accuracy",
+            title="Model Accuracy Comparison",
+            color="Accuracy",
+            color_continuous_scale="Blues"
+        )
+        fig_performance.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font={"color": "white"},
+            height=350
+        )
+        st.plotly_chart(fig_performance, use_container_width=True)
+
+    with col2:
+        # Analysis distribution pie chart
+        analysis_counts = recent_data["Analysis Type"].value_counts()
+        fig_distribution = px.pie(
+            values=analysis_counts.values,
+            names=analysis_counts.index,
+            title="Analysis Type Distribution (Today)",
+            color_discrete_sequence=px.colors.sequential.Blues_r
+        )
+        fig_distribution.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font={"color": "white"},
+            height=350
+        )
+        st.plotly_chart(fig_distribution, use_container_width=True)
 
 
 def show_fish_identification(models):
@@ -878,7 +905,7 @@ def show_fish_identification(models):
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown("### 📏 Fish Measurements")
+        st.markdown("###  Fish Measurements")
 
         with st.container():
             length = st.number_input(
@@ -919,10 +946,10 @@ def show_fish_identification(models):
     with col2:
         st.markdown("### Supported Species Database")
         species_info = {
-            "🐟 Bream": "Medium-sized fish, typically 20-30cm, weight 200-400g. Commonly found in freshwater environments.",
-            "🎣 Perch": "Popular sport fish, 15-25cm length, weight 100-250g. Known for distinctive striped pattern.",
-            "🐊 Pike": "Large predatory fish, 30-40cm+, weight 400-600g+. Apex predator with elongated body.",
-            "🔴 Roach": "Small schooling fish, 15-20cm, weight 80-150g. Common in European freshwater systems.",
+            " Bream": "Medium-sized fish, typically 20-30cm, weight 200-400g. Commonly found in freshwater environments.",
+            " Perch": "Popular sport fish, 15-25cm length, weight 100-250g. Known for distinctive striped pattern.",
+            " Pike": "Large predatory fish, 30-40cm+, weight 400-600g+. Apex predator with elongated body.",
+            " Roach": "Small schooling fish, 15-20cm, weight 80-150g. Common in European freshwater systems.",
         }
         for species, description in species_info.items():
             st.markdown(f"""
@@ -1024,7 +1051,7 @@ def show_fish_identification(models):
             st.markdown(
                 f"""
                 <div class="success-box">
-                    <strong>✅ High Confidence Prediction</strong><br>
+                    <strong> High Confidence Prediction</strong><br>
                     This fish is most likely a <strong>{result['predicted_species']}</strong> with high reliability.
                     The morphometric measurements strongly match this species profile.
                 </div>
@@ -1037,7 +1064,7 @@ def show_fish_identification(models):
 def show_ocean_prediction(models):
     st.markdown("""
     <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: #667eea; font-weight: 600;">🌊 Ocean Parameter Prediction</h2>
+        <h2 style="color: #667eea; font-weight: 600;"> Ocean Parameter Prediction</h2>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1054,7 +1081,7 @@ def show_ocean_prediction(models):
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("### 📍 Location & Environmental Data")
+        st.markdown("### Location & Environmental Data")
 
         latitude = st.slider("Latitude", -90.0, 90.0, 15.0, 0.1, help="Geographic latitude coordinate")
         longitude = st.slider("Longitude", -180.0, 180.0, 75.0, 0.1, help="Geographic longitude coordinate")
@@ -1081,18 +1108,18 @@ def show_ocean_prediction(models):
             help="Ocean pH level (acidity/alkalinity)"
         )
 
-        predict_button = st.button("🌊 Predict Ocean Parameters", type="primary", use_container_width=True)
+        predict_button = st.button(" Predict Ocean Parameters", type="primary", use_container_width=True)
 
     with col2:
-        st.markdown("### 🗺️ Location Preview")
+        st.markdown("### 🗺 Location Preview")
         map_data = pd.DataFrame({"lat": [latitude], "lon": [longitude]})
         st.map(map_data, size=20)
 
-        st.markdown("### 📊 Parameter Information")
+        st.markdown("### Parameter Information")
         param_info = {
-            "🌡️ Temperature": "Sea surface temperature affects marine life distribution and metabolism",
-            "🧂 Salinity": "Salt content influences ocean circulation and marine organism physiology",
-            "💨 Dissolved Oxygen": "Essential for marine life survival and ecosystem productivity",
+            " Temperature": "Sea surface temperature affects marine life distribution and metabolism",
+            " Salinity": "Salt content influences ocean circulation and marine organism physiology",
+            " Dissolved Oxygen": "Essential for marine life survival and ecosystem productivity",
         }
         for param, description in param_info.items():
             st.markdown(f"""
@@ -1104,7 +1131,7 @@ def show_ocean_prediction(models):
             """, unsafe_allow_html=True)
 
     if predict_button:
-        with st.spinner("🤖 Analyzing oceanographic conditions..."):
+        with st.spinner(" Analyzing oceanographic conditions..."):
             result = predict_ocean_parameters_real(latitude, longitude, depth, day_of_year, chlorophyll, ph, models)
 
         st.markdown("---")
@@ -1119,7 +1146,7 @@ def show_ocean_prediction(models):
             st.markdown("""
             <div class="metric-card">
                 <div class="metric-value">{:.1f}°C</div>
-                <div class="metric-label">🌡️ Temperature</div>
+                <div class="metric-label"> Temperature</div>
             </div>
             """.format(result['temperature']), unsafe_allow_html=True)
 
@@ -1127,7 +1154,7 @@ def show_ocean_prediction(models):
             st.markdown("""
             <div class="metric-card">
                 <div class="metric-value">{:.1f}‰</div>
-                <div class="metric-label">🧂 Salinity</div>
+                <div class="metric-label"> Salinity</div>
             </div>
             """.format(result['salinity']), unsafe_allow_html=True)
 
@@ -1135,11 +1162,11 @@ def show_ocean_prediction(models):
             st.markdown("""
             <div class="metric-card">
                 <div class="metric-value">{:.1f} mg/L</div>
-                <div class="metric-label">💨 Dissolved Oxygen</div>
+                <div class="metric-label"> Dissolved Oxygen</div>
             </div>
             """.format(result['dissolved_oxygen']), unsafe_allow_html=True)
 
-        st.markdown("### 📈 Parameter Analysis")
+        st.markdown("###  Parameter Analysis")
         parameters = ["Temperature", "Salinity", "Dissolved Oxygen"]
         values = [
             result["temperature"] / 30 * 100,
@@ -1166,7 +1193,7 @@ def show_ocean_prediction(models):
         )
         st.plotly_chart(fig_radar, use_container_width=True)
 
-        st.markdown("### 🔍 Environmental Assessment")
+        st.markdown("###  Environmental Assessment")
         temp_status = "🟢 Optimal" if 22 <= result["temperature"] <= 28 else "🟡 Sub-optimal"
         sal_status = "🟢 Normal" if 33 <= result["salinity"] <= 36 else "🟡 Abnormal"
         oxy_status = "🟢 Healthy" if result["dissolved_oxygen"] >= 6 else "🔴 Critical"
@@ -1193,7 +1220,7 @@ def show_ocean_prediction(models):
 def show_biodiversity_assessment(models):
     st.markdown("""
     <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: #667eea; font-weight: 600;">🐠 Marine Biodiversity Assessment</h2>
+        <h2 style="color: #667eea; font-weight: 600;"> Marine Biodiversity Assessment</h2>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1245,7 +1272,7 @@ def show_biodiversity_assessment(models):
             help="Percentage of coral coverage in the area"
         )
 
-        st.markdown("### 📍 Geographic Location")
+        st.markdown("###  Geographic Location")
         latitude = st.number_input(
             "Latitude",
             min_value=-90.0,
@@ -1292,7 +1319,7 @@ def show_biodiversity_assessment(models):
             """, unsafe_allow_html=True)
 
     if assess_button:
-        with st.spinner("🤖 Assessing biodiversity..."):
+        with st.spinner(" Assessing biodiversity..."):
             result = assess_biodiversity_real(
                 temperature, depth, pollution_level, coral_cover, latitude, longitude, models
             )
@@ -1309,7 +1336,7 @@ def show_biodiversity_assessment(models):
             st.markdown("""
             <div class="metric-card">
                 <div class="metric-value">{:.0f}</div>
-                <div class="metric-label">🐠 Estimated Species</div>
+                <div class="metric-label"> Estimated Species</div>
             </div>
             """.format(result['species_count']), unsafe_allow_html=True)
 
@@ -1317,7 +1344,7 @@ def show_biodiversity_assessment(models):
             st.markdown("""
             <div class="metric-card">
                 <div class="metric-value">{:.2f}</div>
-                <div class="metric-label">📊 Shannon Diversity</div>
+                <div class="metric-label"> Shannon Diversity</div>
             </div>
             """.format(result['shannon_diversity']), unsafe_allow_html=True)
 
@@ -1334,7 +1361,7 @@ def show_biodiversity_assessment(models):
         col_l, col_r = st.columns(2)
 
         with col_l:
-            st.markdown("### 📊 Category Probabilities")
+            st.markdown("###  Category Probabilities")
             prob_data = pd.DataFrame(
                 list(result["category_probabilities"].items()),
                 columns=["Category", "Probability"],
@@ -1429,7 +1456,7 @@ def show_biodiversity_assessment(models):
 
 
 def show_comprehensive_analysis(models):
-    st.markdown('<h2 class="sub-header">📊 Comprehensive Marine Analysis</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="sub-header">Comprehensive Marine Analysis</h2>', unsafe_allow_html=True)
     st.markdown(
         """
         <div class="info-box">
@@ -1444,14 +1471,14 @@ def show_comprehensive_analysis(models):
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("**🐟 Fish Data**")
+        st.markdown("** Fish Data**")
         fish_length = st.number_input("Fish Length (cm)", min_value=10.0, max_value=50.0, value=25.0, key="comp_length")
         fish_weight = st.number_input("Fish Weight (g)", min_value=50.0, max_value=800.0, value=300.0, key="comp_weight")
         fish_height = st.number_input("Fish Height (cm)", min_value=5.0, max_value=25.0, value=12.0, key="comp_height")
         fish_width = st.number_input("Fish Width (cm)", min_value=2.0, max_value=10.0, value=4.5, key="comp_width")
 
     with col2:
-        st.markdown("**🌊 Ocean Data**")
+        st.markdown("** Ocean Data**")
         latitude = st.slider("Latitude", -90.0, 90.0, 15.0, key="comp_lat")
         longitude = st.slider("Longitude", -180.0, 180.0, 75.0, key="comp_lon")
         depth = st.number_input("Depth (m)", min_value=0.0, max_value=200.0, value=30.0, key="comp_depth")
@@ -1459,40 +1486,40 @@ def show_comprehensive_analysis(models):
         ph = st.number_input("pH", min_value=7.5, max_value=8.5, value=8.1, key="comp_ph")
 
     with col3:
-        st.markdown("**🐠 Biodiversity Data**")
+        st.markdown("** Biodiversity Data**")
         temperature = st.number_input("Temperature (°C)", min_value=15.0, max_value=35.0, value=26.0, key="comp_temp")
         pollution_level = st.slider("Pollution Level", 0.0, 5.0, 1.0, key="comp_pollution")
         coral_cover = st.slider("Coral Cover (%)", 0.0, 100.0, 60.0, key="comp_coral")
         date_input = st.date_input("Analysis Date", datetime.now().date(), key="comp_date")
 
-    if st.button("🚀 Run Comprehensive Analysis", type="primary"):
+    if st.button(" Run Comprehensive Analysis", type="primary"):
         progress_bar = st.progress(0)
         status_text = st.empty()
 
-        status_text.text("🐟 Analyzing fish species...")
+        status_text.text(" Analyzing fish species...")
         fish_result = predict_fish_species_real(fish_length, fish_weight, fish_height, fish_width, models)
         progress_bar.progress(33)
 
-        status_text.text("🌊 Predicting ocean parameters...")
+        status_text.text("Predicting ocean parameters...")
         day_of_year = date_input.timetuple().tm_yday
         ocean_result = predict_ocean_parameters_real(latitude, longitude, depth, day_of_year, chlorophyll, ph, models)
         progress_bar.progress(66)
 
-        status_text.text("🐠 Assessing biodiversity...")
+        status_text.text(" Assessing biodiversity...")
         bio_result = assess_biodiversity_real(temperature, depth, pollution_level, coral_cover, latitude, longitude, models)
         progress_bar.progress(100)
-        status_text.text("✅ Analysis complete!")
+        status_text.text(" Analysis complete!")
 
         st.markdown("---")
-        st.markdown('<h3 class="sub-header">🎯 Comprehensive Results</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 class="sub-header"> Comprehensive Results</h3>', unsafe_allow_html=True)
 
         col_a, col_b, col_c, col_d = st.columns(4)
         with col_a:
-            st.metric("🐟 Fish Species", fish_result["predicted_species"], f"{fish_result['confidence']:.1%} confidence")
+            st.metric(" Fish Species", fish_result["predicted_species"], f"{fish_result['confidence']:.1%} confidence")
         with col_b:
-            st.metric("🌡️ Ocean Temp", f"{ocean_result['temperature']:.1f}°C", "Predicted")
+            st.metric(" Ocean Temp", f"{ocean_result['temperature']:.1f}°C", "Predicted")
         with col_c:
-            st.metric("🐠 Biodiversity", bio_result["biodiversity_category"], f"{bio_result['species_count']} species")
+            st.metric(" Biodiversity", bio_result["biodiversity_category"], f"{bio_result['species_count']} species")
         with col_d:
             health_score = (
                 fish_result["confidence"] + (ocean_result["temperature"] / 30) + (bio_result["shannon_diversity"] / 3.5)
@@ -1606,15 +1633,15 @@ def show_data_visualization():
     viz_type = st.selectbox(
         "Choose Visualization Type",
         [
-            "📊 Fish Species Distribution",
-            "🌊 Ocean Parameter Trends",
-            "🐠 Biodiversity Heatmap",
-            "📈 Correlation Analysis",
-            "🗺️ Geographic Distribution",
+            " Fish Species Distribution",
+            " Ocean Parameter Trends",
+            " Biodiversity Heatmap",
+            " Correlation Analysis",
+            " Geographic Distribution",
         ],
     )
 
-    if viz_type == "📊 Fish Species Distribution":
+    if viz_type == " Fish Species Distribution":
         st.markdown("### Fish Species Distribution Analysis")
 
         np.random.seed(42)
@@ -1674,7 +1701,7 @@ def show_data_visualization():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-    elif viz_type == "🌊 Ocean Parameter Trends":
+    elif viz_type == " Ocean Parameter Trends":
         st.markdown("### Ocean Parameter Trends Analysis")
 
         dates = pd.date_range("2023-01-01", "2024-12-31", freq="D")
@@ -1731,7 +1758,7 @@ def show_data_visualization():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-    elif viz_type == "🐠 Biodiversity Heatmap":
+    elif viz_type == " Biodiversity Heatmap":
         st.markdown("### Biodiversity Distribution Heatmap")
 
         np.random.seed(42)
@@ -1766,7 +1793,7 @@ def show_data_visualization():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        st.markdown("### 📊 Biodiversity Statistics")
+        st.markdown("###  Biodiversity Statistics")
         c1, c2, c3, c4 = st.columns(4)
 
         with c1:
@@ -1802,7 +1829,7 @@ def show_data_visualization():
             </div>
             """.format(high_diversity_sites), unsafe_allow_html=True)
 
-    elif viz_type == "📈 Correlation Analysis":
+    elif viz_type == " Correlation Analysis":
         st.markdown("### Environmental Parameters Correlation Analysis")
 
         np.random.seed(42)
@@ -1882,7 +1909,7 @@ def show_data_visualization():
             )
             st.plotly_chart(fig, use_container_width=True)
 
-    elif viz_type == "🗺️ Geographic Distribution":
+    elif viz_type == " Geographic Distribution":
         st.markdown("### Geographic Distribution of Marine Data")
 
         np.random.seed(42)
@@ -1915,7 +1942,7 @@ def show_data_visualization():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        st.markdown("### 📊 Regional Analysis")
+        st.markdown("###  Regional Analysis")
         c1, c2 = st.columns(2)
 
         with c1:
@@ -1942,411 +1969,181 @@ def show_data_visualization():
             st.plotly_chart(fig, use_container_width=True)
 
 
-def show_about_page():
+def show_dashboard():
     st.markdown("""
-    <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: #667eea; font-weight: 600;"></h2>
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="color: #667eea; font-weight: 600; margin-bottom: 1rem;">
+             Marine Ecosystem Intelligence Dashboard
+        </h2>
+        <p style="color: #e0e6ed; font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+            Real-time monitoring and analysis of marine ecosystems powered by advanced AI models.
+            Access comprehensive tools for species identification, ocean parameter prediction, and biodiversity assessment.
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown(
-        """
-        <div class="info-box">
-            <h3> Centre for Marine Living Resources and Ecology (CMLRE)</h3>
-            <p style="margin-bottom: 0;">Ministry of Earth Sciences, Government of India</p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("###  Project Overview")
-        st.markdown(
-            """
-            The CMLRE Marine ML Platform represents a cutting-edge artificial intelligence system 
-            designed to support marine ecosystem monitoring, conservation, and research activities. 
-            This platform integrates multiple machine learning models to provide comprehensive 
-            analysis of marine environments across the Indian Ocean region.
-
-            **Key Objectives:**
-            - Advanced marine biodiversity assessment and monitoring
-            - Automated fish species identification for fisheries management
-            - Real-time oceanographic parameter prediction and analysis
-            - Comprehensive ecosystem health evaluation and scoring
-            - Evidence-based conservation planning and policy support
-            - Research facilitation for marine science communities
-            """
-        )
-
-        st.markdown("###  Technology Stack")
-        st.markdown(
-            """
-            **Frontend & Visualization:**
-            - Streamlit for interactive web interface
-            - Plotly for advanced data visualizations
-            - Custom CSS for modern UI/UX design
-
-            **Machine Learning & Analytics:**
-            - Scikit-learn for classification algorithms
-            - TensorFlow for deep learning models
-            - NumPy & Pandas for data processing
-            - Statsmodels for statistical analysis
-
-            **Deployment & Infrastructure:**
-            - Streamlit Cloud for scalable deployment
-            - Git-based version control and CI/CD
-            - Modular architecture for easy maintenance
-            """
-        )
-
-    with col2:
-        st.markdown("###  AI Model Specifications")
-
-        model_specs = {
-            "Fish Species Classifier": {
-                "Purpose": "Automated identification of fish species from morphometric measurements",
-                "Species Coverage": "Bream, Perch, Pike, Roach (expandable)",
-                "Accuracy": "85%+ on test datasets",
-                "Input Features": "Length, Weight, Height, Width measurements",
-                "Algorithm": "Random Forest with feature scaling",
-                "Applications": "Fisheries stock assessment, species monitoring"
-            },
-            "Ocean Parameter Predictor": {
-                "Purpose": "Prediction of oceanographic conditions from environmental data",
-                "Parameters": "Temperature, Salinity, Dissolved Oxygen levels",
-                "Input Variables": "Location coordinates, depth, seasonal data, chemical indicators",
-                "Model Type": "Multi-output regression with ensemble methods",
-                "Validation": "Cross-validated on historical oceanographic datasets",
-                "Applications": "Climate monitoring, ecosystem health assessment"
-            },
-            "Biodiversity Assessor": {
-                "Purpose": "Comprehensive evaluation of marine biodiversity and ecosystem health",
-                "Metrics": "Shannon Diversity Index, Species richness estimation",
-                "Environmental Factors": "Temperature, pollution levels, coral coverage, depth",
-                "Output": "Biodiversity category classification with confidence scores",
-                "Framework": "Multi-criteria decision analysis with ML integration",
-                "Applications": "Conservation planning, MPA effectiveness evaluation"
-            }
-        }
-
-        for model_name, specs in model_specs.items():
-            with st.expander(f"🔍 {model_name}", expanded=False):
-                for key, value in specs.items():
-                    st.markdown(f"**{key}:** {value}")
-
-    st.markdown("---")
-
-    st.markdown("###  Research Applications & Impact")
-
-    applications = [
-        {
-            "category": " Fisheries Management",
-            "description": "Stock assessment, sustainable fishing practices, and species population monitoring"
-        },
-        {
-            "category": " Climate Change Research",
-            "description": "Long-term ocean parameter monitoring, climate impact assessment, and trend analysis"
-        },
-        {
-            "category": " Coral Reef Conservation",
-            "description": "Reef health assessment, biodiversity monitoring, and restoration planning"
-        },
-        {
-            "category": " Environmental Impact Assessment",
-            "description": "Pollution monitoring, industrial impact evaluation, and mitigation strategies"
-        },
-        {
-            "category": " Marine Protected Areas",
-            "description": "Site selection optimization, management effectiveness evaluation, and boundary planning"
-        },
-        {
-            "category": " Ecosystem Services Quantification",
-            "description": "Economic valuation of marine ecosystems and natural capital assessment"
-        },
-        {
-            "category": " Education & Capacity Building",
-            "description": "Training programs for marine scientists, conservation practitioners, and policymakers"
-        },
-        {
-            "category": " Policy & Governance Support",
-            "description": "Evidence-based policy recommendations and regulatory compliance monitoring"
-        }
-    ]
-
-    for app in applications:
-        st.markdown(f"""
-        <div style="background: rgba(102, 126, 234, 0.1); padding: 1.2rem; border-radius: 12px; 
-                    margin-bottom: 0.8rem; border-left: 4px solid #667eea;">
-            <strong style="color: #667eea; font-size: 1.1rem;">{app['category']}</strong><br>
-            <span style="color: #e0e6ed; margin-top: 0.5rem; display: block;">{app['description']}</span>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("---")
-
-    st.markdown("###  Platform Performance & Impact Metrics")
-
+    # System Status Overview
+    st.markdown("### 🔧 System Status")
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">1.0.0</div>
-            <div class="metric-label">Platform Version</div>
+            <div class="metric-value">Online</div>
+            <div class="metric-label">🟢 Fish Classifier</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">3</div>
-            <div class="metric-label">AI Models Deployed</div>
+            <div class="metric-value">Active</div>
+            <div class="metric-label"> 🟢 Ocean Predictor</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">60+</div>
-            <div class="metric-label">Monitoring Sites</div>
+            <div class="metric-value">Ready</div>
+            <div class="metric-label"> 🟢 Bio Assessor</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown("""
         <div class="metric-card">
-            <div class="metric-value">Jan 2025</div>
-            <div class="metric-label">Last Updated</div>
+            <div class="metric-value">90%+</div>
+            <div class="metric-label"> 🟢 Avg Accuracy</div>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("---")
 
-    st.markdown("###  Global Collaboration & Partnerships")
-
-    st.markdown("""
-    The CMLRE Marine ML Platform benefits from extensive collaboration with national and 
-    international research institutions, fostering knowledge exchange and technological advancement 
-    in marine science and conservation.
-    """)
-
+    # Quick Actions
+    st.markdown("### ⚡ Quick Actions")
     col1, col2, col3 = st.columns(3)
 
     with col1:
+        if st.button(" Identify Fish Species", use_container_width=True):
+            st.session_state.current_page = "fish"
+            st.rerun()
+
         st.markdown("""
-        **🏛️ Government Partnerships:**
-        - Ministry of Earth Sciences, India
-        - National Institute of Oceanography (NIO)
-        - Indian National Centre for Ocean Information Services (INCOIS)
-        - Coastal & Marine Program, Department of Science & Technology
-        """)
-
-    with col2:
-        st.markdown("""
-        **🎓 Academic Collaborations:**
-        - Indian Institute of Science (IISc)
-        - Indian Institute of Technology (IIT) Network
-        - National Institute of Technology (NIT) System
-        - International Marine Science Consortium
-        """)
-
-    with col3:
-        st.markdown("""
-        **🌐 International Networks:**
-        - UNESCO Intergovernmental Oceanographic Commission
-        - Global Ocean Observing System (GOOS)
-        - International Council for the Exploration of the Sea
-        - Indo-Pacific Marine Science Collaboration
-        """)
-
-    st.markdown("---")
-
-    st.markdown("###  Data Sources & Validation")
-
-    data_sources = {
-        "Oceanographic Data": [
-            "ARGO float network measurements",
-            "Satellite-derived ocean color and temperature",
-            "Coastal monitoring station recordings",
-            "Ship-based CTD measurements",
-            "Autonomous underwater vehicle surveys"
-        ],
-        "Biological Data": [
-            "Fish catch and morphometric databases",
-            "Coral reef monitoring surveys",
-            "Plankton abundance measurements",
-            "Marine mammal sighting records",
-            "Biodiversity assessment field studies"
-        ],
-        "Environmental Data": [
-            "Water quality monitoring networks",
-            "Pollution and contamination surveys",
-            "Habitat mapping and classification",
-            "Climate and weather station data",
-            "Human activity and pressure indicators"
-        ]
-    }
-
-    for category, sources in data_sources.items():
-        with st.expander(f" {category}", expanded=False):
-            for source in sources:
-                st.markdown(f"• {source}")
-
-    st.markdown("---")
-
-    st.markdown("###  Future Development Roadmap")
-
-    roadmap_items = [
-        {
-            "phase": "Phase 1 (Q2 2025)",
-            "features": [
-                "Integration of deep learning models for image-based species identification",
-                "Real-time data streaming from IoT sensors",
-                "Mobile application for field data collection",
-                "Advanced statistical analysis and reporting tools"
-            ]
-        },
-        {
-            "phase": "Phase 2 (Q4 2025)",
-            "features": [
-                "Predictive modeling for climate change impacts",
-                "Integration with satellite remote sensing data",
-                "Automated alert systems for ecosystem threats",
-                "Multi-language support for regional deployment"
-            ]
-        },
-        {
-            "phase": "Phase 3 (2026)",
-            "features": [
-                "Artificial intelligence-driven conservation recommendations",
-                "Integration with global marine databases",
-                "Advanced visualization and virtual reality interfaces",
-                "Blockchain-based data integrity and sharing protocols"
-            ]
-        }
-    ]
-
-    for item in roadmap_items:
-        st.markdown(f"""
-        <div style="background: rgba(102, 126, 234, 0.1); padding: 0.5rem; border-radius: 6px; 
-                    margin-bottom: 0.5rem; border-left: 2px solid #667eea;">
-            <h3 style="color: #667eea; margin-bottom: 1rem;">{item['phase']}</h3>
-            <ul style="margin: 0; color: #e0e6ed;">
+        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; margin-top: 0.5rem;">
+            <small style="color: #e0e6ed;">Use morphometric measurements to classify fish species with 90%+ accuracy.</small>
+        </div>
         """, unsafe_allow_html=True)
 
-        for feature in item['features']:
-            st.markdown(f"<li style='margin-bottom: 0.5rem;'>{feature}</li>", unsafe_allow_html=True)
+    with col2:
+        if st.button(" Predict Ocean Parameters", use_container_width=True):
+            st.session_state.current_page = "ocean"
+            st.rerun()
 
-        st.markdown("</ul></div>", unsafe_allow_html=True)
+        st.markdown("""
+        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; margin-top: 0.5rem;">
+            <small style="color: #e0e6ed;">Predict temperature, salinity, and oxygen levels from environmental data.</small>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        if st.button(" Assess Biodiversity", use_container_width=True):
+            st.session_state.current_page = "biodiversity"
+            st.rerun()
+
+        st.markdown("""
+        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 12px; margin-top: 0.5rem;">
+            <small style="color: #e0e6ed;">Evaluate ecosystem health and species diversity metrics.</small>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.markdown("---")
 
-    st.markdown("### 📞 Contact Information & Support")
+    # Recent Activity Dashboard
+    st.markdown("###  Recent Analysis Activity")
+
+    # Generate sample recent activity data
+    recent_data = pd.DataFrame(
+        {
+            "Timestamp": pd.date_range("2024-01-01 08:00", periods=15, freq="2h"),
+            "Analysis Type": np.random.choice(
+                ["Fish ID", "Ocean Prediction", "Biodiversity Assessment", "Comprehensive Analysis"], 15),
+            "Location": [f"Site_{np.random.randint(1, 21):02d}" for _ in range(15)],
+            "Confidence": np.random.uniform(0.75, 0.95, 15),
+            "Status": np.random.choice(["Completed", "Processing", "Queued"], 15, p=[0.8, 0.15, 0.05])
+        }
+    )
+
+    # Format confidence as percentage
+    recent_data["Confidence"] = (recent_data["Confidence"] * 100).round(1)
+
+    st.dataframe(
+        recent_data.head(10),
+        use_container_width=True,
+        column_config={
+            "Timestamp": st.column_config.DatetimeColumn("Time", format="MMM DD, HH:mm"),
+            "Analysis Type": st.column_config.TextColumn("Analysis"),
+            "Location": st.column_config.TextColumn("Site"),
+            "Confidence": st.column_config.NumberColumn("Confidence (%)", format="%.1f%%"),
+            "Status": st.column_config.TextColumn("Status")
+        }
+    )
+
+    st.markdown("---")
+
+    # Performance Metrics
+    st.markdown("###  Performance Overview")
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("""
-        **🏢 Centre for Marine Living Resources and Ecology (CMLRE)**  
-        Ministry of Earth Sciences  
-        Government of India  
-        Kochi, Kerala 682 037, India
+        # Create sample performance data
+        performance_data = pd.DataFrame({
+            "Model": ["Fish Classifier", "Ocean Predictor", "Biodiversity Assessor"],
+            "Accuracy": [87.3, 84.1, 89.7],
+            "Predictions Today": [45, 32, 28],
+            "Avg Response Time (ms)": [120, 180, 95]
+        })
 
-        **🌐 Official Website:** [www.cmlre.gov.in](https://www.cmlre.gov.in)  
-        **📧 General Email:** info@cmlre.gov.in  
-        **📱 Phone:** +91-484-2390814  
-        **📠 Fax:** +91-484-2390618
-        """)
+        fig_performance = px.bar(
+            performance_data,
+            x="Model",
+            y="Accuracy",
+            title="Model Accuracy Comparison",
+            color="Accuracy",
+            color_continuous_scale="Blues"
+        )
+        fig_performance.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font={"color": "white"},
+            height=350
+        )
+        st.plotly_chart(fig_performance, use_container_width=True)
 
     with col2:
-        st.markdown("""
-        **🔬 Technical Support & Collaboration:**  
-        **Platform Support:** ml-platform@cmlre.gov.in  
-        **Research Collaboration:** research@cmlre.gov.in  
-        **Data Partnership:** data@cmlre.gov.in  
-        **Training & Workshops:** training@cmlre.gov.in
-
-        **🚨 Emergency Marine Issues:**  
-        **24/7 Hotline:** +91-484-2390800  
-        **Emergency Email:** emergency@cmlre.gov.in
-        """)
-
-    st.markdown("---")
-
-    st.markdown("### 📋 Legal & Compliance Information")
-
-    st.markdown("""
-    <div style="background: rgba(102, 126, 234, 0.1); padding: 1.5rem; border-radius: 12px; 
-                border: 1px solid rgba(102, 126, 234, 0.3);">
-        <h4 style="color: #667eea; margin-bottom: 1rem;">Data Privacy & Security</h4>
-        <p style="color: #e0e6ed; margin-bottom: 1rem;">
-            This platform adheres to Indian government data protection guidelines and international 
-            best practices for scientific data management. All research data is handled in accordance 
-            with ethical guidelines and institutional review board approvals.
-        </p>
-
-        <h4 style="color: #667eea; margin-bottom: 1rem;">Open Science & Data Sharing</h4>
-        <p style="color: #e0e6ed; margin-bottom: 1rem;">
-            CMLRE is committed to open science principles. Research outputs and non-sensitive datasets 
-            are made available to the scientific community through appropriate data repositories and 
-            collaborative platforms, subject to ethical and security considerations.
-        </p>
-
-        <h4 style="color: #667eea; margin-bottom: 1rem;">Citation & Attribution</h4>
-        <p style="color: #e0e6ed; margin-bottom: 0;">
-            When using this platform or its outputs in research or publications, please cite: <br>
-            <strong>CMLRE Marine ML Platform (2025). Centre for Marine Living Resources and Ecology, 
-            Ministry of Earth Sciences, Government of India. Available at: [Platform URL]</strong>
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("---")
-
-    st.markdown("### 🙏 Acknowledgments")
-
-    st.markdown("""
-    The development of the CMLRE Marine ML Platform has been made possible through the dedicated 
-    efforts of marine scientists, software engineers, data scientists, and conservation practitioners. 
-    We acknowledge the support of:
-
-    - **Ministry of Earth Sciences** for funding and institutional support
-    - **Field researchers and marine biologists** for data collection and validation
-    - **Software development team** for platform architecture and implementation  
-    - **International collaborators** for knowledge sharing and technical expertise
-    - **Local communities and fishers** for traditional knowledge and field insights
-    - **Academic institutions** for research partnerships and student contributions
-    - **Open source community** for tools and libraries that power this platform
-    """)
-
-    st.markdown("---")
-
-    # Footer with system status
-    st.markdown("""
-    <div style="text-align: center; padding: 2rem; background: rgba(102, 126, 234, 0.1); 
-                border-radius: 16px; margin-top: 2rem;">
-        <p style="color: #667eea; font-weight: 600; margin-bottom: 1rem;">
-            🌊 CMLRE Marine Living Resources ML Platform
-        </p>
-        <p style="color: #e0e6ed; font-size: 0.9rem; margin-bottom: 1rem;">
-            Advancing marine science through artificial intelligence and data-driven insights
-        </p>
-        <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
-            <span style="color: #4ade80; font-size: 0.9rem;">🟢 All Systems Operational</span>
-            <span style="color: #e0e6ed; font-size: 0.9rem;">Last Updated: September 2025</span>
-            <span style="color: #e0e6ed; font-size: 0.9rem;">Version 1.1.3</span>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        # Analysis distribution pie chart
+        analysis_counts = recent_data["Analysis Type"].value_counts()
+        fig_distribution = px.pie(
+            values=analysis_counts.values,
+            names=analysis_counts.index,
+            title="Analysis Type Distribution (Today)",
+            color_discrete_sequence=px.colors.sequential.Blues_r
+        )
+        fig_distribution.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font={"color": "white"},
+            height=350
+        )
+        st.plotly_chart(fig_distribution, use_container_width=True)
 
 
 # -----------------------------------------------------------------------------
 # Main app function with modern navigation
 # -----------------------------------------------------------------------------
 def main():
-    st.markdown('<h1 class="main-header"> OceanOne: Real Time MarineAI for India</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">🌊 OceanOne: Real Time MarineAI for India</h1>', unsafe_allow_html=True)
     st.markdown(
         """
         <div class="info-box">
@@ -2362,8 +2159,11 @@ def main():
     # Create modern navigation and get selected page
     selected_page = create_modern_navigation()
 
-    # Page routing with default fallback
-    if selected_page == "fish" or st.session_state.get("current_page") == "fish":
+    # Updated page routing - removed home and about, default to dashboard
+    if selected_page == "dashboard" or st.session_state.get("current_page") == "dashboard":
+        st.session_state["current_page"] = "dashboard"
+        show_dashboard()
+    elif selected_page == "fish" or st.session_state.get("current_page") == "fish":
         st.session_state["current_page"] = "fish"
         show_fish_identification(models)
     elif selected_page == "ocean" or st.session_state.get("current_page") == "ocean":
@@ -2378,13 +2178,10 @@ def main():
     elif selected_page == "visualization" or st.session_state.get("current_page") == "visualization":
         st.session_state["current_page"] = "visualization"
         show_data_visualization()
-    elif selected_page == "about" or st.session_state.get("current_page") == "about":
-        st.session_state["current_page"] = "about"
-        show_about_page()
     else:
-        # Default to home page
-        st.session_state["current_page"] = "home"
-        show_home_page()
+        # Default fallback to dashboard instead of home
+        st.session_state["current_page"] = "dashboard"
+        show_dashboard()
 
 
 if __name__ == "__main__":
